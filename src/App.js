@@ -12,13 +12,14 @@ class App extends Component {
   handleChange = ({ target: { value, name }}) => this.setState({ [name]: value })
 
   createAndDownloadPdf = () => {
-    axios.post('create-pdf', this.state)
-      .then(() => axios.get('fetch-pdf', { responseType: 'blob' }))
+    axios.post('https://pdf-gen20.herokuapp.com/create-pdf', this.state)
+      .then(() => axios.get('https://pdf-gen20.herokuapp.com/fetch-pdf', { responseType: 'blob' }))
       .then((res) => {
         const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
 
         saveAs(pdfBlob, 'newPdf.pdf');
       })
+      
   }
 
   render() {
